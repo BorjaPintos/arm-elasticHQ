@@ -1,15 +1,12 @@
-FROM python:3.6-alpine3.7
+FROM python:3.6
 
-RUN apk update
-RUN apk add supervisor
-RUN apk add --update py2-pip
+RUN apt-get update
+RUN apt-get install -y supervisor
 
 # Upgrade and install basic Python dependencies
 # This block added because of the trouble installing gevent on many systems
 # https://hub.docker.com/r/openwhisk/dockerskeleton/~/dockerfile/
-RUN apk add --no-cache bash \
- && apk add --no-cache --virtual .build-deps \
-        bzip2-dev \
+RUN apt-get install -y \
         gcc \
         libc-dev
 #  && pip install --no-cache-dir gevent \
